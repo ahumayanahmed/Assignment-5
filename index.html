@@ -9,6 +9,39 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>humayan ahmed</h1>
+    <section class="container mx-auto flex justify-center items-center min-h-screen">
+
+  <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-96 border p-6">
+
+    <div class="text-center mb-4">
+      <img src="assets/github-logo.png" class="mx-auto w-16 mb-2">
+      <h2 class="text-xl font-semibold">GitHub Issues Tracker</h2>
+      <p class="text-sm text-gray-500">Sign in to manage your issues</p>
+    </div>
+
+    <label class="label text-[15px] text-black">Username</label>
+    <input id="username" type="text" class="input input-bordered w-full" placeholder="Enter Username">
+     <p id="defaultUser" class="hidden text-xs text-blue-500 mb-2">Default: admin</p>
+
+    <label class="label text-[15px] text-black">Password</label>
+    <input id="password" type="password" class="input input-bordered w-full" placeholder="Enter Password">
+     <p id="defaultPass" class="hidden text-xs text-blue-500 mb-3">Default: admin123</p>
+
+    <button onclick="login()" class="btn btn-primary w-full mt-4">Sign In</button>
+
+    <!-- Error + Default Credentials -->
+    <div id="errorBox" class="hidden mt-4 text-center bg-red-100 p-3 rounded">
+      <p class="text-red-600 font-semibold">Login Failed!</p>
+      <p class="text-sm">Demo Credentials:</p>
+      <p><b>Username:</b> admin</p>
+      <p><b>Password:</b> admin123</p>
+    </div>
+
+  </fieldset>
+
+</section>
+
+
+<script src="login.js"></script>
 </body>
 </html>
