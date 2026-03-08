@@ -61,10 +61,10 @@ iconStyle = '<img src="assets/Closed- Status .png" class="w-6 h-6">';
 }
 
 
-let labelText = "HELP WANTED";
+     let labelText = issue?.labels?.[0];
 
-if(issue.labels && issue.labels.length > 0){
-labelText = issue.labels[0];
+if (!labelText || labelText.toLowerCase() === "bug") {
+    labelText = "HELP WANTED";
 }
 
 
@@ -104,7 +104,7 @@ ${issue.description}
 </span>
 
 <span class="border border-yellow-400 text-yellow-600 px-2 py-1 rounded-full text-xs">
-${labelText}
+${labelText.toUpperCase()}
 </span>
 
 </div>
@@ -174,18 +174,24 @@ async function showDetails(id) {
 
     document.getElementById("modalTitle").innerText = issue.title;
     document.getElementById("modalDesc").innerText = issue.description;
-
     document.getElementById("modalStatus").innerText = issue.status.charAt(0).toUpperCase() + issue.status.slice(1);
     document.getElementById("modalAuthor").innerText = issue.author;
     document.getElementById("modalDate").innerText = "• " + new Date(issue.createdAt).toLocaleDateString();
+
     document.getElementById("modalCategory").innerText = (issue.category || "bug").toUpperCase();
-    document.getElementById("modalLabel").innerText = (issue.labels && issue.labels.length > 0 ? issue.labels[0] : "help wanted").toUpperCase();
+
+    let labelText = issue?.labels?.[0];
+
+    if (!labelText || labelText.toLowerCase() === "bug") {
+        labelText = "HELP WANTED";
+    }
+    
+    document.getElementById("modalLabel").innerText = labelText.toUpperCase();
     document.getElementById("modalAssignee").innerText = issue.author;
     document.getElementById("modalPriority").innerText = issue.priority.toUpperCase();
 
     document.getElementById("issueModal").showModal();
 }
-
 
 
 
