@@ -192,7 +192,13 @@ HIGH
 </div>
 
 </dialog>
+<script>
+    let labelText = issue?.labels?.[0];
 
+    if (!labelText || labelText.toLowerCase() === "bug") {
+        labelText = "HELP WANTED";
+    }
+</script>
 <script src="script.js"></script>
 
 </body>
