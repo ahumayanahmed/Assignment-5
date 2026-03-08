@@ -116,28 +116,84 @@ class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
 
 <dialog id="issueModal" class="modal">
 
-<div class="modal-box">
+<div class="modal-box max-w-2xl p-8">
+    <h2 id="modalTitle" class="text-2xl font-bold mb-4"></h2>
 
-<h3 id="modalTitle" class="text-lg font-bold"></h3>
+<!-- STATUS ROW -->
+<div class="flex items-center gap-3 mb-6 text-sm text-gray-500">
 
-<p id="modalDesc" class="py-4"></p>
+<span id="modalStatus"
+class="px-4 py-1 bg-green-500 text-white rounded-full text-xs font-semibold">
+Open
+</span>
 
-<p id="modalStatus"></p>
-<p id="modalAuthor"></p>
-<p id="modalPriority"></p>
+<span>
+Opened by <b id="modalAuthor">john_doe</b>
+</span>
 
-<div class="modal-action">
+<span id="modalDate">• 1/15/2024</span>
+
+</div>
+
+
+<!-- LABELS -->
+<div class="flex gap-3 mb-6">
+
+<span id="modalCategory"
+class="border border-red-400 text-red-500 px-4 py-1 rounded-full text-xs font-semibold">
+BUG
+</span>
+
+<span id="modalLabel"
+class="border border-yellow-400 text-yellow-600 px-4 py-1 rounded-full text-xs font-semibold">
+HELP WANTED
+</span>
+
+</div>
+
+
+<!-- DESCRIPTION -->
+<p id="modalDesc" class="text-gray-600 leading-relaxed mb-8">
+The navigation menu doesn't collapse properly on mobile devices.
+Need to fix the responsive behavior.
+</p>
+
+
+<!-- ASSIGNEE + PRIORITY BOX -->
+<div class="bg-gray-100 rounded-xl p-6 flex justify-between items-center mb-8">
+
+<div>
+<p class="text-gray-500 text-sm mb-1">Assignee:</p>
+<p id="modalAssignee" class="font-semibold text-lg">john_doe</p>
+</div>
+
+<div class="flex flex-col justify-center items-center">
+<p class="text-gray-500 text-sm mb-1">Priority:</p>
+
+<span id="modalPriority"
+class="bg-red-500 text-white px-4 py-1 rounded-full text-xs font-semibold">
+HIGH
+</span>
+
+</div>
+
+</div>
+
+
+<!-- CLOSE BUTTON -->
+<div class="flex justify-end">
+
 <form method="dialog">
-<button class="btn">Close</button>
+<button class="btn btn-primary px-6">Close</button>
 </form>
+
 </div>
 
 </div>
 
 </dialog>
 
-
-<script src="test.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>

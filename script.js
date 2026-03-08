@@ -35,14 +35,14 @@ issue.status === "open"
 : "border-t-4 border-purple-500";
 
 
-// Status Icon
+
 let iconStyle =
 issue.status === "open"
 ? '<img src="assets/Open-Status.png" class="w-6 h-6">'
 : '<img src="assets/Closed- Status .png" class="w-6 h-6">';
 
 
-// Priority Badge
+
 let priorityStyle = "";
 
 if(issue.priority === "high"){
@@ -58,6 +58,13 @@ iconStyle = '<img src="assets/Open-Status.png" class="w-6 h-6">';
 else{
 priorityStyle = "bg-purple-100 text-purple-600";
 iconStyle = '<img src="assets/Closed- Status .png" class="w-6 h-6">';
+}
+
+
+let labelText = "HELP WANTED";
+
+if(issue.labels && issue.labels.length > 0){
+labelText = issue.labels[0];
 }
 
 
@@ -83,25 +90,21 @@ ${issue.priority.toUpperCase()}
 
 <h3 class="text-lg font-semibold text-gray-800 mb-2 cursor-pointer"
 onclick="showDetails(${issue.id})">
-
 ${issue.title}
-
 </h3>
 
 <p class="text-gray-500 text-sm mb-4">
-
 ${issue.description}
-
 </p>
 
 <div class="flex gap-2 mb-4">
 
 <span class="border border-red-300 text-red-500 px-2 py-1 rounded-full text-xs">
-${issue.category || "bug"}
+<p>BUG</p>
 </span>
 
 <span class="border border-yellow-400 text-yellow-600 px-2 py-1 rounded-full text-xs">
-${issue.label || "help wanted"}
+${labelText}
 </span>
 
 </div>
@@ -164,25 +167,25 @@ displayIssues(data.data);
 
 
 
-async function showDetails(id){
+async function showDetails(id) {
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+    const data = await res.json();
+    const issue = data.data;
 
-const res = await fetch(
-`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`
-);
+    document.getElementById("modalTitle").innerText = issue.title;
+    document.getElementById("modalDesc").innerText = issue.description;
 
-const data = await res.json();
+    document.getElementById("modalStatus").innerText = issue.status.charAt(0).toUpperCase() + issue.status.slice(1);
+    document.getElementById("modalAuthor").innerText = issue.author;
+    document.getElementById("modalDate").innerText = "• " + new Date(issue.createdAt).toLocaleDateString();
+    document.getElementById("modalCategory").innerText = (issue.category || "bug").toUpperCase();
+    document.getElementById("modalLabel").innerText = (issue.labels && issue.labels.length > 0 ? issue.labels[0] : "help wanted").toUpperCase();
+    document.getElementById("modalAssignee").innerText = issue.author;
+    document.getElementById("modalPriority").innerText = issue.priority.toUpperCase();
 
-const issue = data.data;
-
-document.getElementById("modalTitle").innerText = issue.title;
-document.getElementById("modalDesc").innerText = issue.description;
-document.getElementById("modalStatus").innerText = "Status: " + issue.status;
-document.getElementById("modalAuthor").innerText = "Author: " + issue.author;
-document.getElementById("modalPriority").innerText = "Priority: " + issue.priority;
-
-document.getElementById("issueModal").showModal();
-
+    document.getElementById("issueModal").showModal();
 }
+
 
 
 
